@@ -37,23 +37,22 @@
 <!-- /TOC -->
 
 ## Introduction - Description of the program
-This program is a bioinformatic tool, developed in Python, that models and reconstructs macro-complex structures of biomolecules formed by proteins. The macrocomplex is built from binary interactions in PDB format. To do so, the program performs sequence alignments and superimposition.
+This program is a bioinformatic tool, developed in Python, that models and reconstructs macro-complex structures of biomolecules formed by proteins. The macrocomplex is built from binary interactions in PDB format. To achieve its purpose, the program performs sequence alignments and superimposition.
 
 
 ## Biological Background
 
-Function and molecular properties of proteins have been an essential focus of research over many years. However, proteins rarely act individually, but form wide physical connections to interact with other proteins. It is not possible to think in cells as several compounds in a shared space, but as a complete “ecosystem” where everything is interacting. Understanding this ecosystem and its processes at a molecular level is very important and necessary to develop and understand how this could affect life beings.
+Function and molecular properties of proteins have been an essential focus of research over many years. However, proteins rarely act individually, but form wide physical connections to interact with other proteins. It is not possible to think in cells as several compounds in a shared space, but as a complete “ecosystem” where everything is interacting. Understanding this ecosystem and its processes at a molecular level is very important and necessary to develop and understand how this could affect living beings.
 In a more particular scenario, understanding these processes could help to identify therapeutic targets in order to predict, stabilize or cure diseases.
 
-When a group of polypeptide chains is linked by non-covalent protein-protein interactions, it forms a protein complex. So, protein-protein interactions (PPIs) are a fundamental part of the functionality of cells. It is for that reason that understanding PPIs helps and increases a lot the knowledge about the function of the effect of proteins and its possible changes. However, determining the structure of these PPIs is not easy nor fast since there are many factors involved such as the size of the complex, the number of interactions, the flexibility of the structure or even the interaction not only between proteins, but also with DNA or RNA. 
+When a group of polypeptide chains is linked by non-covalent protein-protein interactions, it forms a protein complex. Protein-protein interactions (PPIs) are a fundamental part of the functionality of cells. It is for that reason that understanding PPIs helps and increases a lot the knowledge about the function of the effect of proteins and its possible changes. However, determining the structure of these PPIs is not easy nor fast since there are many factors involved such as the size of the complex, the number of interactions, the flexibility of the structure or even the interaction not only between proteins, but also with DNA or RNA. 
 
-The main goal of this project is to be able to build a program that reconstructs known
-protein-protein interaction complexes, as an approach to detect protein complexes.
+The main goal of this project is to be able to build a program that reconstructs known protein-protein interaction complexes, as an approach to detect protein complexes.
 Our approach does not consider scenarios where DNA or RNA take place. It tries to reconstruct the macro-complexes by superimposing similar chains and, consequently, adding the corresponding chains to the considered “reference” structure. 
 
 The superimposition can only be made with quite good results if sequences are equal or at least similar. It is for that reason that we do not do superimposition without previous sequence alignment. Only sequences with an alignment score higher than 0.95 will be candidates for superimposition. However, only those chains with the same molecule type and similar lengths will be superimposed. 
 When superimposing, a rotation and translation matrix is applied to the chain desired to move in such a way that this adopts a new conformation. It is at that moment that this new changed chain will be added to the building complex.
-Nevertheless, different superimpositions of two chains can be obtained, so here comes in the RMSD, the Root Mean Square Deviation. This value measures the structural similarity by measuring the average distance between two sets of atoms considering the distance between backbone-atomic coordinates between the reference and sample chains. The lowest this value is, the more similar the two structures are. Another important thing to take into account is the minimization of the number of clashes produced between neighbouring atoms.
+Nevertheless, different superimpositions of two chains can be obtained, so there comes in the Root Mean Square Deviation (RMSD). This value measures the structural similarity by measuring the average distance between two sets of atoms considering the distance between backbone-atomic coordinates between the reference and sample chains. The lowest this value is, the more similar the two structures are. Another important thing to take into account is the minimization of the number of clashes produced between neighbouring atoms.
 
 
 
@@ -103,11 +102,11 @@ In order to run the program from the command line, some arguments are required a
 
 - `-o`, `--output-directory`: this argument is **optional**. It is expected to be the name of the directory that will be generated and where the output files of the program will be stored. If no name is specified, the default output folder will be named “output”. Inside this directory, two other folders will be generated: “structures” and “analysis”.
 
-- `-f`, `--force`: this argument is **optional**. By default it is False unless the contrary is specified. If it is False and the output directory exists before the program is executed, the program is aborted. If it is True, then the contents of the directory will be overwritten.
+- `-f`, `--force`: this argument is **optional**. By default it is False unless the contrary is specified. If it is False and the output directory exists before the program is executed, the program is aborted. If it is True, the contents of the directory will be overwritten.
 
 - `-v`, `--verbose`: this argument is **optional**. If it is specified, the progression log of the program execution is printed to standard error. If it is not used, the progression log is generated in a log file but no standard error is shown to the user.
 
-- `-ofn`, `--output_filename`: this argument is **optional**. It is expected to be the name of the file that will contain the final macro-complex built in PDB format. If it is not specified, the final model will be called `final_macrocomplex.pdb`.
+- `-ofn`, `--output_filename`: this argument is **optional**. It is expected to be the name of the file that will contain the final macro-complex built in PDB format. If it is not specified, the final model will be named `final_macrocomplex.pdb`.
 
 
 The program generates two files: a **final complex in a pdb file**, which will contain the structure of the macro-complex reconstructed, and a **log file** with the progression of the program. Both files are always generated but the PDB file is stored in the subdirectory called `structures` and the log in the subdirectory `analysis`.
