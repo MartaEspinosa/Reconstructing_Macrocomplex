@@ -1,0 +1,19 @@
+DEBUG:...STARTING...
+INFO:This program is analyzing 5 from 5 files.
+
+INFO:The naming structure and the chains in the following structure file don't coincide:
+INFO:1gzx_A_a
+INFO:The naming structure and the chains in the following structure file don't coincide:
+INFO:1gzx_A_z
+INFO:
+Stoichiometry was not provided. The program will use 1 for each chain as default value.
+
+INFO:The files provided contain Protein-Protein Interactions.
+
+INFO:Chain A of the reference structure and chain A of the sample structure have been superimposed with a RMSD of 0.000.
+
+INFO:Chain A of the reference structure and chain C of the sample structure have been superimposed with a RMSD of 0.000.
+
+INFO:Chain A has become chain 'q' and has been added to the model.
+
+INFO:The macrocomplex built has 3 chains.

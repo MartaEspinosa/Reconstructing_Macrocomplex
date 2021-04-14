@@ -99,7 +99,6 @@ if __name__=="__main__":
                 for line in file:
                     stoich_info = line.strip().split(":")
                     stoichiometry_file[stoich_info[0]] = int(stoich_info[1])
-                    print(stoichiometry_file)
         except FileNotFoundError:
             logging.info("\nWe could not find the stoichiometry file provided. Aborting program. Please try again.")
             exit()
@@ -115,7 +114,6 @@ if __name__=="__main__":
 
         # get the first file as reference and put it to the end of the list
         id_list = list(pdb_structure.keys())
-        print(id_list)
         reference_id = id_list.pop(0)
         id_list.append(reference_id)
         current_stoichiometry = {reference_id:1}
