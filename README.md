@@ -118,7 +118,7 @@ The whole program is basically based on the `Biopython package`, but many others
 
 1. **Biopython**
 
-	`Biopython` is the main open-source collection of tools written in Python to work with biological data. Several subpacked of this package are used in the program:
+	`Biopython` is the main open-source collection of tools written in Python to work with biological data. Several subpackages of this package are used in the program:
 	
 	- `Bio.PDB`: to deal with PDB files.
 		- `PDBParser`: to parse PDB files and obtain structure objects.
@@ -189,12 +189,12 @@ All these functions have been created with the intention of creating a more reus
 
 - **read\_pdb_files**
 
-	This function reads the pdb files to obtain a structure from them. To do so, it uses the `PDBParser` from the `Biopython` module `Bio.PDB`. It checks the chains inside the pdb, and also informs whether these chains coincide with the chains in the filename. It also looks for every residue in the chains and if heteroatoms are found, they are removed. It then checks the type of molecule using the function `get_atoms_and_molecule`, that will be explained below. If we are dealing with proteins, it checks that the interaction is truly binary, and if it is, it saves the structure in a dictionary, with the file id as key, and returns it. If the interaction involves DNA or RNA, it will inform the user that our program is not able to analyse these situations. 
+	This function reads the pdb files to obtain a structure from them. To do so, it uses the `PDBParser` from the `Biopython` module `Bio.PDB`. It checks the chains inside the pdb, and also informs whether these chains coincide with the chains in the filename. It also looks for every residue in the chains and if heteroatoms are found, they are removed. It then checks the type of molecule using the function `get_atoms_and_molecule`, that will be explained below. If we are dealing with proteins, it checks that the interaction is truly binary, and if it is, it saves the structure in a dictionary, with the file id as key, and returns it. If the interaction involves DNA or RNA, it informs the user that our program is not able to analyse these situations. 
 
 
 - **get\_atoms\_and_molecule**
 
-	This function compares the atom and molecule type of a chain of a PDB structure object. It will check the kind of atoms that the provided chain has: for proteins, carbon atoms will be coded as CA, while nucleic acids will have C4’. It also differentiates between DNA and RNA, while checking for the type of nucleobases it has.
+	This function compares the atom and molecule type of a chain of a PDB structure object. It will check the kind of atoms that the provided chain has: for proteins, carbon atoms will be found coded in the pdb as CA, while nucleic acids will have C4’. It also differentiates between DNA and RNA, while checking for the type of nucleobases it has.
 It returns a list with atoms and another one with molecules indicating whether the chain is DNA, RNA or PROTEIN.
 
 
@@ -242,9 +242,9 @@ We have created a directory named examples where the examples we have used are s
 
 ### Example 1gzx
 
-This first example is an oxy T state haemoglobin, a protein involved in oxygen transport in Homo sapiens. It is composed by 4 hemo groups, with two unique chains, having a cyclic global symmetry. The stoichoimetry of the complex is `A2B2`. The structure was obtained by Paoli, M et al (1996) using X-ray crystal, and the pdb entry of the protein also provides the oxygen bound to the four hemos. 
+This first example is an oxy T state haemoglobin, a protein involved in oxygen transport in *Homo sapiens*. It is composed by 4 hemo groups, with two unique chains, having a cyclic global symmetry. The stoichoimetry of the complex is `A2B2`. The structure was obtained by Paoli, M et al (1996) using X-ray crystal, and the pdb entry of the protein also provides the oxygen bound to the four hemos. 
 
-In this case, we have activated the verbose flag, so, the progression log of the program is provided as standard error. Moreover, in the input directory there are some wrong named files for the program to detect them.
+In this case, we have activated the verbose flag, so the progression log of the program is provided as standard error. Moreover, in the input directory there are some wrong named files for the program to detect them.
 
 ```bash
 $ python3 main_reconstructing_macrocomplex.py -i examples/1gzx -o 1gzx_output -v
@@ -265,7 +265,7 @@ Considering this, the quality of the program for this example is good but incomp
 
 ### Example 5fj8
 
-This example is a RNA polymerase III elongation complex from Saccharomyces cerevisiae, a protein involved in the control of the transcription process. It is an Hetero 17-mer, so, its stoichiometry is `A1B1C1D1E1F1G1H1I1J1K1L1M1N1O1P1Q1`.
+This example is a RNA polymerase III elongation complex from *Saccharomyces cerevisiae*, a protein involved in the control of the transcription process. It is an Hetero 17-mer, so, its stoichiometry is `A1B1C1D1E1F1G1H1I1J1K1L1M1N1O1P1Q1`.
 
 Its structure contains 17 unique protein chains and 4 unique nucleic acid chains, so we can already know that our program will not be able to construct the macro-complex completely. 
 Specifically, this structure was obtained by Hoffmann, N.A. et.al (2015) by cryo-electron microscopy.
@@ -283,7 +283,7 @@ The computation time of the execution is 25.617s. As expected, the more chains t
 | *Reference* | *Model* | *Superimposition-Reference* | *Superimposition-Model* |
 
 
-So, the conclusion for this example is the same as previously. The quality of the program is good but incomplete. The model obtained fits perfectly with the reference one but there are few iterations missing. In this case, the program is skipping the DNA-protein interactions, and it is warning us about this at the beginning of the progression log.
+The conclusion for this example is the same as previously. The quality of the program is good but incomplete. The model obtained fits perfectly with the reference one but there are few iterations missing. In this case, the program is skipping the DNA-protein interactions, and it is warning us about this at the beginning of the progression log.
 
 
 ## Limitations
@@ -291,11 +291,11 @@ So, the conclusion for this example is the same as previously. The quality of th
 Our program provides an heuristic solution to the problem as it uses a practical method but it does not guarantee a perfect or optimal solution, instead, provides a sufficient one for reaching an immediate goal in a reasonable time frame.
 We are totally aware that our program is not complete and has some important limitations.
 
-In the first place, the program needs binary interactions to work but it is not able to generate them, so we have run out of examples to prove its effectiveness. Probably, if we have had access to more examples our program would be better trained. This lack of training implies a low reproducibility as it does not work with any protein or any input file.
+In the first place, the program needs binary interactions to work but it is not able to generate them, so we have run out of examples to prove its effectiveness. Probably, if we had had access to more examples our program could have been better trained. This lack of training implies a low applicability as it does not work with any protein or any input file.
 
 Secondly, it does not reconstruct fully complexes, as there is always some chain missing to be added. We think this is because of some error in the code that we have not been able to detect, so we are not sure which is the reason to add more or less chains depending on the reference.
 
-Moreover, protein-nucleotide interactions are not taken into account. The program checks if a particular interaction is between proteins or with nucleotides, but does not go further on these last. To do so, some code should be changed in order to analyze these interactions that the program does recognise. However, if this happens, the program warns the user.
+Moreover, protein-nucleotide interactions are not taken into account. The program checks if a particular interaction is between proteins or with nucleotides, but does not go further on the latter. To do so, some code should be changed in order to analyze these interactions that the program does recognise. However, if this happens, the program warns the user.
 
 On the other hand, the stoichiometry does not work properly. We have established a method to consider input files with stoichiometry but it does not generate the expected output when it is provided. Actually, it only works when the stoichiometry is said to be 1, as it happens by default.
 
@@ -306,6 +306,6 @@ To avoid misunderstandings when visualizing the complex, we change ids of the ch
 
 ## Discussion - Conclusions
 
-Considering all said before, we completely know our program is neither perfect nor complete, but we think that what it does is good. 
+Considering everything said before, we completely know our program is neither perfect nor complete, but we think that what it does is good. 
 We consider we still require knowledge and understanding in many aspects of the field and that few help has been provided to understand the specific scope of the project.
-However, we have done our best and with more knowledge, time and help, new versions could be developed.
+However, we have done our best and with more knowledge, time and guidance, new improved versions could be developed.
