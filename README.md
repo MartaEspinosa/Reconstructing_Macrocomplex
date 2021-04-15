@@ -6,7 +6,7 @@ title: Reconstructing macrocomplexes
 author: by Irene Agustí Barea and Marta Espinosa Camarena
 
 
-date: April , 221
+date: 15th April, 2021
 output: pdf_document
 header-includes:
   - \usepackage{titling}
